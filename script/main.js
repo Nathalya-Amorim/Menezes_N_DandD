@@ -16,6 +16,10 @@
 	gameBoard = document.querySelector('.puzzle-board'),
 	pzlPieces = document.querySelectorAll('.puzzle-pieces img'),
 	dropZones = document.querySelectorAll('.drop-zone');
+ 
+
+
+	const imageNames = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
 
 
 
@@ -28,10 +32,11 @@
 	]
 	*/
 
-	function changeBgImg() {
+	function changeImageSet() {
 		// The "this" keyword refers to the element that triggers this function ( the nav button we click with the custom data attribute of bgref)
 		// debugger;
 		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
+
 		dropZones.forEach(item => {item.innerHTML = ""});
 		puzzleBoard = document.querySelector(".puzzle-pieces");
 		puzzleBoard.innerHTML = "";
@@ -72,7 +77,7 @@
 	// how do we want the user to interact with the elements that we collected earlier?
 	// Events are things like clicks, double-clicks, keypresses...all the ways that a user can interact with a mouse, keyboard...
 
-	theThumbnails.forEach(thumb => thumb.addEventListener('click', changeBgImg));
+	theThumbnails.forEach(thumb => thumb.addEventListener('click', changeImageSet));
 	pzlPieces.forEach(piece => piece.addEventListener('dragstart', allowDrag));
 	
 	// Set up the drop zone event handling
