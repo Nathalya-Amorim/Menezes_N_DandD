@@ -1,0 +1,18 @@
+## Crashing Bugs 
+
+
+##Reseting Puzzle Pieces
+ 
+-Selected the div with class Puzzle-pieces
+-Reseted the dropzone
+-Reseted puzzle-board
+-Changed the puzzle-pieces src
+-Adding the puzzle-board with the new puzzle-pieces;
+
+##Do not add the more than 1 picture in the same spot:
+
+Check console to check where the pictures are being dropped;
+Check the ChildElement; 
+BUG: If I drop the image inside the drop zone - the validation works
+If I drop the image on the top of another image - the validation does not work. 
+- Create a IF saying : If the childelement/target is 0 and not an image then, allow dropping.
