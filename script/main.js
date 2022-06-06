@@ -31,7 +31,14 @@
 	function changeBgImg() {
 		// The "this" keyword refers to the element that triggers this function ( the nav button we click with the custom data attribute of bgref)
 		// debugger;
-		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`
+		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
+		dropZones.forEach(item => {item.innerHTML = ""});
+		puzzleBoard = document.querySelector(".puzzle-pieces");
+		puzzleBoard.innerHTML = "";
+		pzlPieces.forEach(item => {
+			item.src = `images/backGround${this.dataset.bgref}.jpg`;
+			puzzleBoard.appendChild(item);
+		});
 	}
 
 	function allowDrag(event) {
