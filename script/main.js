@@ -31,7 +31,15 @@
 	function changeBgImg() {
 		// The "this" keyword refers to the element that triggers this function ( the nav button we click with the custom data attribute of bgref)
 		// debugger;
-		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`
+		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
+		dropZones.forEach(item => {item.innerHTML = ""});
+		puzzleBoard = document.querySelector(".puzzle-pieces");
+		puzzleBoard.innerHTML = "";
+		pzlPieces[0].src = `images/topLeft${this.dataset.bgref}.jpg`;
+		pzlPieces[1].src = `images/topRight${this.dataset.bgref}.jpg`;
+		pzlPieces[2].src = `images/bottomLeft${this.dataset.bgref}.jpg`;
+		pzlPieces[3].src = `images/bottomRight${this.dataset.bgref}.jpg`;
+		pzlPieces.forEach(item => puzzleBoard.appendChild(item));
 	}
 
 	function allowDrag(event) {
@@ -49,12 +57,15 @@
 	function allowDrop(event) {
 		event.preventDefault();
 		console.log('dropped me');
-
-		let droppedElId = event.dataTransfer.getData('draggedEl');
+		
+		if (event.target.childElementCount == 0 && !(event.target instanceof HTMLImageElement)){
+			let droppedElId = event.dataTransfer.getData('draggedEl');
+		
+			// retrieve the dragged el by its ID, and then put inside the current drop zone
 	
-		// retrieve the dragged el by its ID, and then put inside the current drop zone
+			this.appendChild(document.querySelector(`#${droppedElId}`));
+		} 
 
-		this.appendChild(document.querySelector(`#${droppedElId}`));
 	}
 
 	// add event handling here 
