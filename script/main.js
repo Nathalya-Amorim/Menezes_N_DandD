@@ -37,18 +37,14 @@
 		// debugger;
 		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
 
-		// this is the element (thumbnail) we clicked on
-		let clickedThumb = this; 
-	
-
-		// debugger; 
-		// this will pause code execution on this line. like pushing pause netflix
-
-		// upadate the draggable piece's src attribute one at a time
-		pzlPieces.forEach((piece,index) => {
-			piece.src = `images/${imageNames[index] + clickedThumb.dataset.bgref}.jpg`;
-
-		});
+		dropZones.forEach(item => {item.innerHTML = ""});
+		puzzleBoard = document.querySelector(".puzzle-pieces");
+		puzzleBoard.innerHTML = "";
+		pzlPieces[0].src = `images/topLeft${this.dataset.bgref}.jpg`;
+		pzlPieces[1].src = `images/topRight${this.dataset.bgref}.jpg`;
+		pzlPieces[2].src = `images/bottomLeft${this.dataset.bgref}.jpg`;
+		pzlPieces[3].src = `images/bottomRight${this.dataset.bgref}.jpg`;
+		pzlPieces.forEach(item => puzzleBoard.appendChild(item));
 	}
 
 	function allowDrag(event) {
@@ -66,12 +62,15 @@
 	function allowDrop(event) {
 		event.preventDefault();
 		console.log('dropped me');
-
-		let droppedElId = event.dataTransfer.getData('draggedEl');
+		
+		if (event.target.childElementCount == 0 && !(event.target instanceof HTMLImageElement)){
+			let droppedElId = event.dataTransfer.getData('draggedEl');
+		
+			// retrieve the dragged el by its ID, and then put inside the current drop zone
 	
-		// retrieve the dragged el by its ID, and then put inside the current drop zone
+			this.appendChild(document.querySelector(`#${droppedElId}`));
+		} 
 
-		this.appendChild(document.querySelector(`#${droppedElId}`));
 	}
 
 	// add event handling here 
